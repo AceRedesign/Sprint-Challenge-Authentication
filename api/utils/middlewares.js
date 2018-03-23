@@ -29,7 +29,8 @@ const encryptUserPW = (req, res, next) => {
   bcrypt
     .hash(password, SaltRounds)
     .then(hashedPassword => {
-      req.user = { username, password: hashedPassword }.next();
+      req.user = { username, password: hashedPassword };
+      next();
     })
     .catch(error => res.status(500).json({ error: "Hashing failure" }));
 };
